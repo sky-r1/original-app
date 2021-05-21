@@ -5,13 +5,23 @@
         <h3 class="card-title"><%= @user.name %></h3>
       </div>
       <div class="card-body">
-        
+        <% if @user.img? %>
+          <%= image_tag @user.img.url, size:'500x500', class: 'rounded img-fluid', alt: "" %>
+        <% else %>
+          <%= image_tag "icon_144400_128.png", size:'500x500', class: 'rounded img-fluid', alt: "" %>
+        <% end %>
       </div>
     </div>
+    <% if @current_user == @user %>
+      <%= link_to "プロフィールを編集する", edit_user_path(@user) %>
+    <% end %>
   </aside>
   <div class="col-sm-8">
+    <div>名前：<%= @user.name %></div>
+    <div>ID：<%= @user.account %></div>
+    <div>自己紹介：<%= @user.intro %></div>
     <ul class="nav nav-tabs nav-justified mb-3">
-      <li class="nav-item"><a href="#" class="nav-link">Microposts</a></li>
+      <li class="nav-item"><a href="#" class="nav-link">Posts</a></li>
       <li class="nav-item"><a href="#" class="nav-link">Followings</a></li>
       <li class="nav-item"><a href="#" class="nav-link">Followers</a></li>
     </ul>

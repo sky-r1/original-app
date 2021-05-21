@@ -1,2 +1,64 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+<div class="text-center">
+  <h1>プロフィール編集</h1>
+</div>
+
+<div class="row">
+  <div class="col-sm-6 offset-sm-3">
+
+    <%= form_with(model: @user, local: true) do |f| %>
+      <%= render 'layouts/error_messages', model: f.object %>
+      
+      <div class="form-group">
+        <%= f.label :img %>
+        <%= f.file_field :img, class: 'form-control'%>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :name, '名前' %>
+        <%= f.text_field :name, class: 'form-control' ,placeholder: 'ユーザーネーム'%>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :account, 'ユーザID' %>
+        <%= f.text_field :account, class: 'form-control' ,placeholder: 'ユーザID'%>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :intro, '自己紹介' %>
+        <%= f.text_field :intro, class: 'form-control' ,placeholder: '自己紹介'%>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :birtrhday, '生年月日' %>
+        <%= f.text_field :birthday, class: 'form-control' ,placeholder: '生年月日'%>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :gender, '性別' %>
+        <%= f.select :gender, {"男":"男", "女":"女", "未選択":"未選択"}, { include_blank: '選択してください' }, { class: 'form-control' }  %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :email, 'メールアドレス' %>
+        <%= f.email_field :email, class: 'form-control' ,placeholder: 'メールアドレス'%>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :phone, 'Phone' %>
+        <%= f.text_field :phone, class: 'form-control' ,placeholder: '電話番号'%>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :password, 'Password' %>
+        <%= f.password_field :password, class: 'form-control' ,placeholder: 'パスワード'%>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password_confirmation, 'Confirmation' %>
+        <%= f.password_field :password_confirmation, class: 'form-control' ,placeholder: 'パスワード確認用'%>
+      </div>
+
+      <%= f.submit 'Save', class: 'btn btn-primary btn-block' %>
+    <% end %>
+  </div>
+</div>

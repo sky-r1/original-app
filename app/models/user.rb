@@ -1,6 +1,12 @@
 class User < ApplicationRecord
+  
+  mount_uploader :img, ImgUploader
+  
   before_save { self.email.downcase! }
   before_save { self.account.downcase! }
+  
+  
+  
   validates :name, presence: true, length: { maximum: 50 }
   validates :account, presence: true, length: { maximum: 50 },
                       format: { with: /\A[\w\-.@_]+\z/i },
@@ -15,4 +21,5 @@ class User < ApplicationRecord
   # validates :img
 
   has_secure_password
+  
 end
