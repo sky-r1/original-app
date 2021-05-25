@@ -1,5 +1,16 @@
 <% if logged_in? %>
-  <p>ログイン完了ユーザ: <%= current_user.name %></p>
+  <div class="position-relative">
+    <div class="position-absolute bottom-0 end-0">
+      <%= link_to '投稿', new_post_path, class: 'btn btn-lg border border-dark btn-outline-primary rounded-circle' %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-8 offset-sm-2">
+      <%= render 'posts/posts', posts: @posts %>
+    </div>
+  </div>
+  
+  
 <% else %>
   <div class="center jumbotron">
     <div class="text-center">

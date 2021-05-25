@@ -21,9 +21,10 @@
     <div>ID：<%= @user.account %></div>
     <div>自己紹介：<%= @user.intro %></div>
     <ul class="nav nav-tabs nav-justified mb-3">
-      <li class="nav-item"><a href="#" class="nav-link">Posts</a></li>
+      <li class="nav-item"><a href="<%= user_path(@user) %>" class="nav-link <%= 'active' if current_page?(user_path(@user)) %>">Posts  <span class="badge badge-secondary"><%= @count_microposts %></span></a></li>
       <li class="nav-item"><a href="#" class="nav-link">Followings</a></li>
       <li class="nav-item"><a href="#" class="nav-link">Followers</a></li>
     </ul>
+    <%= render 'posts/posts', posts: @posts %>
   </div>
 </div>

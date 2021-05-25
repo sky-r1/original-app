@@ -1,0 +1,15 @@
+<%= form_with(model: @post, local: true) do |f| %>
+  <% if @post.img?%>
+    <%= image_tag @post.img.url, size:'500x500', class: 'rounded img-fluid', alt: ""%>
+  <% end %>
+  <div class="form-group">
+    <%= f.label :img %>
+    <%= f.file_field :img, class: 'form-control'%>
+  </div>
+      
+  <div class="form-group">
+    <%= f.label :content, 'コメント' %>
+    <%= f.text_area :content, class: 'form-control', rows: 5 %>
+  </div>
+  <%= f.submit 'Post', class: 'btn btn-primary btn-block' %>
+<% end %>
