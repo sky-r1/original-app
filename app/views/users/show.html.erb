@@ -1,31 +1,58 @@
-<div class="row">
+<div class="row mb-3" style="height: 250px;">
   <aside class="col-sm-4">
-    <div class="card">
-      <div class="card-header">
-        <h3 class="card-title"><%= @user.name %></h3>
-      </div>
-      <div class="card-body">
-        <% if @user.img? %>
-          <%= image_tag @user.img.url, size:'500x500', class: 'rounded img-fluid', alt: "" %>
-        <% else %>
-          <%= image_tag "icon_144400_128.png", size:'500x500', class: 'rounded img-fluid', alt: "" %>
-        <% end %>
-      </div>
-    </div>
-    <% if @current_user == @user %>
-      <%= link_to "プロフィールを編集する", edit_user_path(@user) %>
+    <% if @user.img? %>
+      <%= link_to image_tag(@user.img.url, class: 'rounded user_icon', style: "height: auto;", alt: ""), user_path(@user) %>
+    <% else %>
+      <%= link_to image_tag("icon_144400_128.png", class: 'rounded user_icon', style: "height: auto", alt: ""), user_path(@user) %>
     <% end %>
-    <%= render 'relationships/follow_button', user: @user %>
   </aside>
   <div class="col-sm-8">
-    <div>名前：<%= @user.name %></div>
-    <div>ID：<%= @user.account %></div>
-    <div>自己紹介：<%= @user.intro %></div>
+    <div class="row">
+      <div class="col-sm-4">
+        <table class="table table-borderless table-sm">
+          <tr>
+            <th>名前</th>
+            <td><%= @user.name %></td>
+          </tr>
+          <tr>
+            <th>ID</th>
+            <td><%= @user.account %></td>
+          </tr>
+          <tr>
+            <th><a href="<%= followers_user_path(@user) %>" class="btn btn-outline-dark <%= 'active' if current_page?(followers_user_path(@user)) %>">フォロワー</a></th>
+            <td><span class="badge badge-secondary"><%= @count_followers %></span></td>
+          </tr>
+          <tr>
+            <th><a href="<%= followings_user_path(@user) %>" class="btn btn-outline-dark <%= 'active' if current_page?(followings_user_path(@user)) %>">フォロー中</a></th>
+            <td><span class="badge badge-secondary"><%= @count_followings %></span></td>  
+          </tr>
+        </table>
+      </div>
+      <div class="col-sm-8">
+        <div style="text-align: right;">
+          <% if @current_user == @user %>
+            <%= link_to "プロフィール編集", edit_user_path(@user), class: "btn btn-dark" %>
+          <% else %>
+            <%= render 'relationships/follow_button', user: @user %>
+          <% end %>
+        </div>
+        <table class="table table-borderless table-sm mt-3">
+          <tbody>
+            <tr>
+              <th>自己紹介</th>
+              <td><%= @user.intro %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
     <ul class="nav nav-tabs nav-justified mb-3">
-      <li class="nav-item"><a href="<%= user_path(@user) %>" class="nav-link <%= 'active' if current_page?(user_path(@user)) %>">Posts  <span class="badge badge-secondary"><%= @count_posts %></span></a></li>
-      <li class="nav-item"><a href="<%= followings_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(followings_user_path(@user)) %>">Followings  <span class="badge badge-secondary"><%= @count_followings %></span></a></li>
-      <li class="nav-item"><a href="<%= followers_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(followers_user_path(@user)) %>">Followers  <span class="badge badge-secondary"><%= @count_followers %></span></a></li>
+      <li class="nav-item"><a href="<%= user_path(@user) %>" class="nav-link <%= 'active' if current_page?(user_path(@user)) %>">投稿 <span class="badge badge-secondary"><%= @count_posts %></span></a></li>
+      <li class="nav-item"><a href="#" class="nav-link" >マイバイク</a></li>
+      <li class="nav-item"><a href="#" class="nav-link" >整備履歴 </a></li>
     </ul>
-    <%= render 'posts/posts', posts: @posts %>
   </div>
+</div>
+<div>
+  <%= render 'posts/user_post', posts: @posts %>
 </div>

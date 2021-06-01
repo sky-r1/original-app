@@ -1,31 +1,45 @@
 <ul class="list-unstyled">
   <% posts.each do |post| %>
-    <li class="media mb-3">
-      <% if post.user.img? %>
-        <%= image_tag post.user.img.url, size:'50x50', class: 'mr-2 rounded img-fluid', alt: "" %>
-      <% else %>
-        <%= image_tag "icon_144400_128.png", size:'50x50', class: 'mr-2 rounded img-fluid', alt: "" %>
-      <% end %>
-      <div class="media-body">
-        <div>
-          <%= link_to post.user.name, user_path(post.user) %> <span class="text-muted">posted at <%= post.created_at %></span>
-        </div>
-        <div>
-          <%= image_tag post.img.url, size:'500x500', class: 'rounded img-fluid', alt: ""%>
-        </div>
-        <div>
-          <p><%= post.content %></p>
-        </div>
-        <div>
-          <% if current_user == post.user %>
-            <%= link_to "Delete", post, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
+    <li class="container mb-3 border bg-light">
+      <div class="row border-bottom bg-dark" style="height: 50px">
+        <div class="col-sm-auto m-1 bg-white">
+          <% if post.user.img? %>
+            <%= link_to image_tag(post.user.img.url, class: 'rounded users', alt: ""), user_path(post.user) %>
+          <% else %>
+            <%= link_to image_tag("icon_144400_128.png", class: 'rounded users', alt: ""), user_path(post.user) %>
           <% end %>
         </div>
-        <div>
-          <% if current_user == post.user %>
-            <%= link_to "Edit", edit_post_path(post), class: 'btn btn-danger btn-sm' %>
+        <div class="text-white col">
+          <%= link_to post.user.name, user_path(post.user), class: "text-white",style: "font-size: 30px;"%>
+        </div>
+        <% if @current_user == post.user %>
+          <div class="dropdown col-sm-auto m-1">
+            <button class="btn btn-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              ･･･
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <%= link_to "削除", post, method: :delete, data: { confirm: "本当に削除しますか？" }, class: "dropdown-item" %>
+              <%= link_to "編集", edit_post_path(post), class: "dropdown-item" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="row m-2 border">
+        <div class="col-sm-6" style="margin: auto;">
+          <% if post.img? %>
+            <%= image_tag post.img.url, size:'500x500', class: 'rounded img-fluid', alt: "" %>
+          <% else %>
+            <%= image_tag "no_image.png", size:'500x500', class: 'rounded img-fluid', alt: "" %>
           <% end %>
         </div>
+        <div class="col-sm-6 border-left">
+          <P class="text-muted"><%= post.created_at %></P>
+          <p style="white-space: pre-wrap;"><%= post.content %></p>
+          <%= render 'comments/comments', comments: post.commenteds %>
+        </div>
+      </div>
+      <div>
+        <%= render 'comments/form', post: post %>
       </div>
     </li>
   <% end %>

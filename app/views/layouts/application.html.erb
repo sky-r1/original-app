@@ -17,10 +17,13 @@
     <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
   </head>
 
-  <body>
-    <%= render 'layouts/navbar' %>
+  <body class="" style="background-color: skyblue;">
+    <div class="fixed-top">
+      <%= render 'layouts/navbar' %>
+    </div>
+    
 
-    <div class="container">
+    <div class="container" style="padding-top: 5rem">
       <%= render 'layouts/flash_messages' %>
 
       <%= yield %>

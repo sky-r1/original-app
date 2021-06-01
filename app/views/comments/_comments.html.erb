@@ -1,0 +1,15 @@
+<ul class="list-unstyled">
+  <% comments.each do |comment| %>
+    <li class="container border-bottom">
+      <div style="font-size: 12px;">
+        <%= comment.created_at %>
+      </div>
+      <div>
+        <%= link_to comment.user.name, user_path(comment.user) %> : <%= comment.content %>
+        <% if current_user == comment.user %>
+          <%= link_to "削除", comment, method: :delete, data: { confirm: "本当に削除しますか？" }, class: "text-danger float-right" %>
+        <% end %>
+      </div>
+    </li>
+  <% end %>
+</ul>

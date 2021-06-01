@@ -3,68 +3,67 @@
 </div>
 
 <div class="row">
-  <div class="col-sm-6 offset-sm-3">
-
+  <div class="col-sm-8 offset-sm-2">
     <%= form_with(model: @user, local: true) do |f| %>
       <%= render 'layouts/error_messages', model: f.object %>
-      
-      <% if @user.img? %>
-        <%= image_tag @user.img.url, size:'500x500', class: 'mr-2 rounded img-fluid', alt: "" %>
-      <% else %>
-        <%= image_tag "icon_144400_128.png", size:'50x50', class: 'mr-2 rounded img-fluid', alt: "" %>
-      <% end %>
-      
-      <div class="form-group">
-        <%= f.label :img %>
-        <%= f.file_field :img, class: 'form-control'%>
+      <div class="row">
+        <div class="col m-5">
+          <% if @user.img? %>
+            <%= image_tag @user.img.url, size:'300x300', class: 'mr-2 rounded img-fluid', alt: "" %>
+          <% else %>
+            <%= image_tag "icon_144400_128.png", size:'300x300', class: 'mr-2 rounded img-fluid', alt: "" %>
+          <% end %>
+        </div>
+        <div class="col-sm-3 m-5">
+          <%= f.submit '変更を保存', class: 'btn btn-primary btn-block' %>
+          <%= link_to "ユーザー削除", @current_user, method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-block btn-danger mt-5" %>
+        </div>
       </div>
       
-      <div class="form-group">
-        <%= f.label :name, '名前' %>
-        <%= f.text_field :name, class: 'form-control' ,placeholder: 'ユーザーネーム'%>
-      </div>
-      
-      <div class="form-group">
-        <%= f.label :account, 'ユーザID' %>
-        <%= f.text_field :account, class: 'form-control' ,placeholder: 'ユーザID'%>
-      </div>
-      
-      <div class="form-group">
-        <%= f.label :intro, '自己紹介' %>
-        <%= f.text_field :intro, class: 'form-control' ,placeholder: '自己紹介'%>
-      </div>
-      
-      <div class="form-group">
-        <%= f.label :birtrhday, '生年月日' %>
-        <%= f.text_field :birthday, class: 'form-control' ,placeholder: '生年月日'%>
-      </div>
-      
-      <div class="form-group">
-        <%= f.label :gender, '性別' %>
-        <%= f.select :gender, {"男":"男", "女":"女", "未選択":"未選択"}, { include_blank: '選択してください' }, { class: 'form-control' }  %>
-      </div>
-      
-      <div class="form-group">
-        <%= f.label :email, 'メールアドレス' %>
-        <%= f.email_field :email, class: 'form-control' ,placeholder: 'メールアドレス'%>
-      </div>
-      
-      <div class="form-group">
-        <%= f.label :phone, 'Phone' %>
-        <%= f.text_field :phone, class: 'form-control' ,placeholder: '電話番号'%>
-      </div>
-      
-      <div class="form-group">
-        <%= f.label :password, 'Password' %>
-        <%= f.password_field :password, class: 'form-control' ,placeholder: 'パスワード'%>
-      </div>
-
-      <div class="form-group">
-        <%= f.label :password_confirmation, 'Confirmation' %>
-        <%= f.password_field :password_confirmation, class: 'form-control' ,placeholder: 'パスワード確認用'%>
-      </div>
-
-      <%= f.submit 'Save', class: 'btn btn-primary btn-block' %>
+      <table class="table table-striped table-dark mb-5">
+        <tbody>
+          <tr>
+            <th><%= f.label :img, 'プロフィール画像' %></th>
+            <td><%= f.file_field :img, class: 'form-control' %></td> 
+          </tr>
+          <tr>
+            <th><%= f.label :name, '名前' %></th>
+            <td><%= f.text_field :name, class: 'form-control', placeholder: '例：田中　太郎' %></td>
+          </tr>
+          <tr>
+            <th><%= f.label :account, 'ユーザID' %></th>
+            <td><%= f.text_field :account, class: 'form-control', placeholder: '例：tanaka_taro' %></td>
+          </tr>
+          <tr>
+            <th><%= f.label :intro, '自己紹介' %></th>
+            <td><%= f.text_area :intro, class: 'form-control',rows: 3, placeholder: '例：よろしくお願いします！' %></td>
+          </tr>
+          <tr>
+            <th><%= f.label :birtrhday, '生年月日' %></th>
+            <td><%= f.text_field :birthday, class: 'form-control', placeholder: '例：20210101' %></td>
+          </tr>
+          <tr>
+            <th><%= f.label :gender, '性別' %></th>
+            <td><%= f.select :gender, {"男":"男", "女":"女", "未選択":"未選択"}, { include_blank: '選択してください' }, { class: 'form-control' }  %></td>
+          </tr>
+          <tr>
+            <th><%= f.label :email, 'メールアドレス' %></th>
+            <td><%= f.email_field :email, class: 'form-control', placeholder: '例：example@yaeh.com' %></td>
+          </tr>
+          <tr>
+            <th><%= f.label :phone, '電話番号' %></th>
+            <td><%= f.text_field :phone, class: 'form-control', placeholder: '例：09012345678' %></td>
+          </tr>
+          <tr>
+            <th><%= f.label :password, 'パスワード' %></th>
+            <td><%= f.password_field :password, class: 'form-control', placeholder: 'パスワード' %></td>
+          </tr>
+          <tr>
+            <th><%= f.label :password_confirmation, 'パスワード確認用' %></th>
+            <td><%= f.password_field :password_confirmation, class: 'form-control', placeholder: 'パスワード確認用' %></td>
+          </tr>
+        </tbody>
+      </table>
     <% end %>
   </div>
 </div>

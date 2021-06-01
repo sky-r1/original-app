@@ -55,3 +55,9 @@ gem 'kaminari'
 
 #画像アップロード
 gem 'carrierwave'
+
+gem 'dotenv-rails'
+
+gem 'recaptcha',  require: "recaptcha/rails"
+
+gem 'fog-aws'

@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
   
+  # reCAPTCHA
+  # prepend_before_action :check_captcha, only: [:create]
+  
   before_action :require_user_logged_in, only: [:index, :show, :edit, :update, :destroy, :followings, :followers]
   
   def index
@@ -21,7 +24,7 @@ class UsersController < ApplicationController
 
     if @user.save
       flash[:success] = 'ユーザを登録しました。'
-      redirect_to @user
+      redirect_to login_path
     else
       flash.now[:danger] = 'ユーザの登録に失敗しました。'
       render :new
@@ -44,10 +47,10 @@ class UsersController < ApplicationController
   end
   
   def destroy
-    @user.destroy
+    @current_user.destroy
         
     flash[:success] = "User は正常に削除されました"
-    redirect_to users_url
+    redirect_to root_url
   end
   
   def followings
@@ -67,4 +70,14 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :account, :intro, :birthday, :gender, :email, :phone, :img, :password, :password_confirmation)
   end
+  
+  # reCAPTCHA
+  # def check_captcha
+  #   if verify_recaptcha(model: @user)
+  #     redirect_to login_path
+  #   else 
+  #     render 'new' 
+  #   end
+  # end
+
 end

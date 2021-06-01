@@ -1,15 +1,24 @@
 <%= form_with(model: @post, local: true) do |f| %>
+  <%= render 'layouts/error_messages', model: f.object %>
+  <div class="text-center mt-5">
   <% if @post.img?%>
-    <%= image_tag @post.img.url, size:'500x500', class: 'rounded img-fluid', alt: ""%>
+    <%= image_tag @post.img.url, size:'500x500', class: 'bg-white border rounded img-fluid', alt: ""%>
   <% end %>
-  <div class="form-group">
-    <%= f.label :img %>
-    <%= f.file_field :img, class: 'form-control'%>
+  
+  <table class="table table-striped table-dark mt-5 mb-5">
+    <tbody>
+      <tr>
+        <th><%= f.label :img %></th>
+        <td><%= f.file_field :img, class: 'form-control'%></td>
+      </tr>
+          
+      <tr>
+        <th><%= f.label :content, 'コメント' %></th>
+        <td><%= f.text_area :content, class: 'form-control', rows: 8 %></td>
+      </tr> 
+    </tbody>
+  </table>
+    <%= f.submit '投稿する', class: 'btn btn-primary mb-5' %>
   </div>
-      
-  <div class="form-group">
-    <%= f.label :content, 'コメント' %>
-    <%= f.text_area :content, class: 'form-control', rows: 5 %>
-  </div>
-  <%= f.submit 'Post', class: 'btn btn-primary btn-block' %>
+  
 <% end %>

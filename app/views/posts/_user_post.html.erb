@@ -1,0 +1,17 @@
+<div class="container">
+  <ul class="list-unstyled row">
+    <% posts.each do |post| %>
+      <li class="col-sm-4 mb-3">
+        <div class="m-2">
+          <div class="border bg-white">
+            <% if post.img? %>
+              <%= link_to image_tag(post.img.url, size:'500x500', class: 'rounded img-fluid', alt: ""), post_path(post) %>
+            <% else %>
+              <%= link_to image_tag("no_image.png", size:'500x500', class: 'rounded img-fluid', alt: ""), post_path(post) %>
+            <% end %>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+</div>

@@ -7,6 +7,8 @@ class PostsController < ApplicationController
   end
 
   def show
+    @post = Post.find(params[:id])
+    @comment = @current_user.comments.build
   end
 
   def new
@@ -14,7 +16,6 @@ class PostsController < ApplicationController
   end
 
   def create
-    # @post = Post.new(post_params)
     @post = current_user.posts.build(post_params)
 
     if @post.save
@@ -31,13 +32,13 @@ class PostsController < ApplicationController
   end
 
   def update
-    @post = Post.new(post_params)
+    @post = Post.find(params[:id])
 
-    if @post.save
-      flash[:success] = '投稿しました。'
+    if @post.update(post_params)
+      flash[:success] = '編集しました。'
       redirect_to root_url
     else
-      flash.now[:danger] = '投稿に失敗しました。'
+      flash.now[:danger] = '編集に失敗しました。'
       render :edit
     end
   end
@@ -46,6 +47,11 @@ class PostsController < ApplicationController
     @post.destroy
     flash[:success] = '投稿を削除しました。'
     redirect_back(fallback_location: root_path)
+  end
+  
+  def commentes
+    @post = Post.find(params[:id])
+    @comments = @post.commenters.page(params[:page])
   end
   
   private
