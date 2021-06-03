@@ -1,3 +1,6 @@
+<% unless current_user.posts.first %>
+  <div>まだ投稿がありません。右下の投稿ボタンから投稿してみよう！</div>
+<% end %>
 <ul class="list-unstyled">
   <% posts.each do |post| %>
     <li class="container mb-3 border bg-light">

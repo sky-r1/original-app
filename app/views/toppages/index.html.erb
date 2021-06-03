@@ -4,6 +4,14 @@
     <%= link_to '投稿', new_post_path, class: 'toukou btn btn-lg border border-dark btn-dark' %>
   </div>
   
+  <!--<div class="row">-->
+  <!--  <div class="col-sm-10 offset-sm-1">-->
+  <!--    <% unless current_user.posts.find_by(id: params[:id]) %>-->
+  <!--      <div>まだ投稿がありません。右下の投稿ボタンから投稿してみよう！</div>-->
+  <!--    <% end %>-->
+  <!--  </div>-->
+  <!--</div>-->
+  
   <div class="row">
     <div class="col-sm-10 offset-sm-1">
       <%= render 'posts/posts', posts: @posts %>

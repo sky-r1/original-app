@@ -48,11 +48,14 @@
     </div>
     <ul class="nav nav-tabs nav-justified mb-3">
       <li class="nav-item"><a href="<%= user_path(@user) %>" class="nav-link <%= 'active' if current_page?(user_path(@user)) %>">投稿 <span class="badge badge-secondary"><%= @count_posts %></span></a></li>
-      <li class="nav-item"><a href="#" class="nav-link" >マイバイク</a></li>
-      <li class="nav-item"><a href="#" class="nav-link" >整備履歴 </a></li>
+      <!--<li class="nav-item"><a href="#" class="nav-link" >マイバイク</a></li>-->
+      <!--<li class="nav-item"><a href="#" class="nav-link" >整備履歴 </a></li>-->
     </ul>
   </div>
 </div>
 <div>
+  <% unless current_user.followers.first %>
+    <div>まだフォロワーはいません。</div>
+  <% end %>
   <%= render 'users', users: @followers %>
 </div>

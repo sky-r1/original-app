@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
       flash[:success] = 'コメントしました。'
       redirect_back(fallback_location: root_path)
     else
-      flash[:danger] = 'コメントは必ず100文字以内で入力してください。'
+      flash[:danger] = 'コメントは必ず1文字以上100文字以内で入力してください。'
       redirect_back(fallback_location: root_path)
     end
   end
