@@ -54,8 +54,11 @@
   </div>
 </div>
 <div>
-  <% unless current_user.posts.first %>
-    <div>まだ投稿がありません。右下の投稿ボタンから投稿してみよう！</div>
+  <% unless @user.posts.first %>
+    <div>まだ投稿はありません。</div>
+    <% if @current_user == @user %>
+      <div>ホームから投稿してみよう！</div>
+    <% end %>
   <% end %>
   <%= render 'posts/user_post', posts: @posts %>
 </div>

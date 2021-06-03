@@ -55,8 +55,11 @@
   </div>
 </div>
 <div>
-  <% unless current_user.followings.first %>
-    <div>まだフォローしている人がいません。ユーザー一覧からフォローしてみよう！</div>
+  <% unless @user.followings.first %>
+    <div>まだフォローしている人はいません。</div>
+    <% if @current_user == @user %>
+      <div>ユーザー一覧からフォローしてみよう！</div>
+    <% end %>
   <% end %>
   <%= render 'users', users: @followings %>
 </div>

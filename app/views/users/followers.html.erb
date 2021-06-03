@@ -54,7 +54,7 @@
   </div>
 </div>
 <div>
-  <% unless current_user.followers.first %>
+  <% unless @user.followers.first %>
     <div>まだフォロワーはいません。</div>
   <% end %>
   <%= render 'users', users: @followers %>
