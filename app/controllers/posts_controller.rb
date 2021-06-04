@@ -17,7 +17,6 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
-
     if @post.save
       flash[:success] = '投稿しました。'
       redirect_to root_url
@@ -46,7 +45,7 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     flash[:success] = '投稿を削除しました。'
-    redirect_back(fallback_location: root_path)
+    redirect_to root_url
   end
   
   def commentes
@@ -57,7 +56,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:img, :content)
+    params.require(:post).permit(:img, :content, :img_cache)
   end
   
   def correct_user

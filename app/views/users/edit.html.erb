@@ -3,18 +3,18 @@
 </div>
 
 <div class="row">
-  <div class="col-sm-8 offset-sm-2">
+  <div class="col-md-8 offset-md-2 col-10 offset-1">
     <%= form_with(model: @user, local: true) do |f| %>
       <%= render 'layouts/error_messages', model: f.object %>
       <div class="row">
-        <div class="col m-5">
+        <div class="col m-4">
           <% if @user.img? %>
-            <%= image_tag @user.img.url, size:'300x300', class: 'mr-2 rounded img-fluid', alt: "" %>
+            <%= image_tag @user.img.url, class: 'mr-2 rounded img-fluid border', alt: "" %>
           <% else %>
-            <%= image_tag "icon_144400_128.png", size:'300x300', class: 'mr-2 rounded img-fluid', alt: "" %>
+            <%= image_tag "icon_144400_128.png", class: 'mr-2 rounded img-fluid border', alt: "" %>
           <% end %>
         </div>
-        <div class="col-sm-3 m-5">
+        <div class="col-auto m-auto">
           <%= f.submit '変更を保存', class: 'btn btn-primary btn-block' %>
           <%= link_to "ユーザー削除", @current_user, method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-block btn-danger mt-5" %>
         </div>

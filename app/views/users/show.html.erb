@@ -1,14 +1,14 @@
-<div class="row mb-3" style="height: 250px;">
-  <aside class="col-sm-4">
+<div class="row mb-3 mx-2">
+  <aside class="col-lg-4">
     <% if @user.img? %>
-      <%= link_to image_tag(@user.img.url, class: 'rounded user_icon', style: "height: auto;", alt: ""), user_path(@user) %>
+      <%= link_to image_tag(@user.img.url, class: 'rounded user_icon border', style: "height: auto;", alt: ""), user_path(@user) %>
     <% else %>
-      <%= link_to image_tag("icon_144400_128.png", class: 'rounded user_icon', style: "height: auto", alt: ""), user_path(@user) %>
+      <%= link_to image_tag("icon_144400_128.png", class: 'rounded user_icon border', style: "height: auto", alt: ""), user_path(@user) %>
     <% end %>
   </aside>
-  <div class="col-sm-8">
+  <div class="col-lg-8">
     <div class="row">
-      <div class="col-sm-4">
+      <div class="col-auto">
         <table class="table table-borderless table-sm">
           <tr>
             <th>名前</th>
@@ -28,7 +28,7 @@
           </tr>
         </table>
       </div>
-      <div class="col-sm-8">
+      <div class="col-md-8">
         <div style="text-align: right;">
           <% if @current_user == @user %>
             <%= link_to "プロフィール編集", edit_user_path(@user), class: "btn btn-dark" %>
@@ -36,14 +36,9 @@
             <%= render 'relationships/follow_button', user: @user %>
           <% end %>
         </div>
-        <table class="table table-borderless table-sm mt-3">
-          <tbody>
-            <tr>
-              <th>自己紹介</th>
-              <td><%= @user.intro %></td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="mt-3">
+          <p style="white-space: pre-wrap; word-wrap: break-word;"><%= @user.intro %></p>
+        </div>
       </div>
     </div>
     <ul class="nav nav-tabs nav-justified mb-3">
@@ -53,7 +48,7 @@
     </ul>
   </div>
 </div>
-<div>
+<div class="mb-3 mx-2">
   <% unless @user.posts.first %>
     <div>まだ投稿はありません。</div>
     <% if @current_user == @user %>
