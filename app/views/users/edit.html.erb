@@ -40,19 +40,19 @@
           </tr>
           <tr>
             <th><%= f.label :birtrhday, '生年月日' %></th>
-            <td><%= f.text_field :birthday, class: 'form-control', placeholder: '例：20210101' %></td>
+            <td><%= f.date_select :birthday, include_blank: true, use_month_numbers: true, start_year: 1900, end_year: (Time.now.year - 10) %></td>
           </tr>
           <tr>
             <th><%= f.label :gender, '性別' %></th>
-            <td><%= f.select :gender, {"男":"男", "女":"女", "未選択":"未選択"}, { include_blank: '選択してください' }, { class: 'form-control' }  %></td>
+            <td><%= f.select :gender, {"男":"男", "女":"女"}, { include_blank: '未選択' }, { class: 'form-control' }  %></td>
           </tr>
           <tr>
             <th><%= f.label :email, 'メールアドレス' %></th>
-            <td><%= f.email_field :email, class: 'form-control', placeholder: '例：example@yaeh.com' %></td>
+            <td><%= f.email_field :email, class: 'form-control', placeholder: '例：example@example.com' %></td>
           </tr>
           <tr>
             <th><%= f.label :phone, '電話番号' %></th>
-            <td><%= f.text_field :phone, class: 'form-control', placeholder: '例：09012345678' %></td>
+            <td><%= f.telephone_field :phone, class: 'form-control', placeholder: '例：09012345678' %></td>
           </tr>
           <tr>
             <th><%= f.label :password, 'パスワード' %></th>
