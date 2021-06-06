@@ -4,13 +4,12 @@
   <% if @post.img?%>
     <%= image_tag @post.img.url, class: 'bg-white border rounded img-fluid', alt: ""%>
   <% end %>
-  
+  <%= f.hidden_field :img_cache %>
   <table class="table table-striped table-dark mt-5 mb-5">
     <tbody>
       <tr>
         <th><%= f.label :img %></th>
         <td><%= f.file_field :img, class: 'form-control' %></td>
-        <%= f.hidden_field :img_cache %>
       </tr>
           
       <tr>
